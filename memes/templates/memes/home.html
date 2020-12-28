@@ -1,0 +1,65 @@
+{% extends 'memes/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'memes/navbar.html' %}
+
+<div class="row">
+    <div class="col-12">
+        {% if not memes %}
+            <div class="ml-4 pt-6" style="margin-left: 35%;margin-top: 14%;">
+                <h5 style="font-size: 50px;">Welcome to GrayQuest</h5>
+            </div>
+        {% endif %}
+        {% for image in memes %}
+            <img src="{{ image.url }}" alt="" class="rounded float-left" height="400" width="400">
+        {% endfor %}
+    </div>
+</div>
+<div class='cookie-banner' style='display: none'>
+<p>
+    By using our website, you agree to our
+    <a href='insert-link'>cookie policy</a>
+</p>
+<button class='close'>&times;</button>
+<button type="submit" class="btn-primary" id="accept">Accept</button>
+</div>
+{% endblock %}
+
+{% block script %}
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+const cookie_value = getCookie('cookie-accepted')
+if (cookie_value != 'true') {
+    $('.cookie-banner').delay(5000).fadeIn();
+}
+
+$('#accept').click(()=>{
+    $('.cookie-banner').fadeOut();
+     document.cookie = 'cookie-accepted=true;path=/'//name + "=" + (value || "")  + expires + "; path=/".setItem('cookie-accepted', true)
+     location.reload();
+});
+
+$('.close').click(function() {
+    $('.cookie-banner').fadeOut();
+    // set cookie false
+    document.cookie = 'cookie-accepted=false;path=/'
+    
+    // alert
+    alert("Sorry we can't proced further. Accept cookies to continue!")
+    
+    //reload after two sec
+    setTimeout(()=>{
+        location.reload();
+    }, 2000);
+    
+})
+{% endblock%}
