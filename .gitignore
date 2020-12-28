@@ -2,3 +2,4 @@
 db.sqbpro
 *.pyc
 
+db.sqlite3

@@ -20,13 +20,21 @@
         {% endfor %}
     </div>
 </div>
-<div class='cookie-banner' style='display: none'>
+<div class='cookie-banner row' style='display: none; height: 10%;'>
+<div class="col-6">
 <p>
     By using our website, you agree to our
     <a href='insert-link'>cookie policy</a>
 </p>
-<button class='close'>&times;</button>
-<button type="submit" class="btn-primary" id="accept">Accept</button>
+</div>
+<div class="col-2">
+    <button type="submit" class="btn-primary" style="width: 100px;height: 40px;" id="accept">Accept</button>
+</div>
+<div class="col-4">
+    <button class='btn-danger close'>Close</button>
+    <br>
+    
+</div>
 </div>
 {% endblock %}
 
@@ -39,7 +47,7 @@ function getCookie(name) {
 
 const cookie_value = getCookie('cookie-accepted')
 if (cookie_value != 'true') {
-    $('.cookie-banner').delay(5000).fadeIn();
+    $('.cookie-banner').delay(1000).fadeIn();
 }
 
 $('#accept').click(()=>{
